@@ -1,3 +1,7 @@
+## Audio Graph
+
+![a visual graph of the audio configuration](audio-config.png)
+
 ## Setup
 
 - Ensure any audio device that will be connected to the virtual audio cables is configured to use a sample rate of 48000 Hz.
@@ -9,14 +13,15 @@
 | 1            | Line 1   | Virtual Chat In  |
 | 2            | Line 2   | Virtual Default  |
 | 3            | Line 3   | Virtual Mixer    |
-| 4            | Line 4   | Virtual Music    |
+| 4            | Line 4   | Virtual Media    |
 | 5            | Line 5   | Virtual Guitar   |
 | 6            | Line 6   | Virtual Chat Out |
 
 - Install Nvidia RTX Voice and configure it to use your physical microphone as its input device (to denoise your mic) and `Virtual Chat In` as its output device (to denoise incoming chat audio).
 - Set `Virtual Default` to be your default device and default communication device under `Playback`
 - Set `Virtual Chat Out` to be your default device and default communication device under `Recording`
-- Go to `App volume and device preferences` under `Advanced sound options` in the Windows 10 settings app and configure any music player apps (e.g. Spotify) to output to `Virtual Music`
+- Go to `App volume and device preferences` under `Advanced sound options` in the Windows 10 settings app and configure any media player apps (e.g. Spotify) to output to `Virtual Media`
+- Configure any voice chat apps to output incoming chat audio to `Speakers (NVIDIA RTX Voice)`
 - Disable audio ducking in Windows
 
 ### Configure run on startup
@@ -37,8 +42,15 @@ The Windows volume controls will not work for audio that is forwarded with the K
 
 ## TODO
 
-- Add graph of audio cable network to this documentation
-- Determine how to use RTX Voice with incoming audio. Do we then still need the `Chat In - Mixer` repeater?
 - Configure Shadowplay for instant replay recording and document configuration
 - Configure OBS and document configuration
+- Configure Discord and document configuration
+- Configure Google Meet and document configuration
 - Document Tracktion Waveform configuration for guitar effects
+
+## Attribution
+
+Images
+```
+electric guitar by Juan Pablo Bravo from the Noun Project
+```
