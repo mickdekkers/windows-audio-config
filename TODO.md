@@ -1,5 +1,6 @@
 ## TODO
 
+- Figure out how to record the audio of one of the virtual cables with e.g. Audacity. I think KS takes exclusive control, so this may not actually work with the KS repeater and we may have to switch to the MME repeater.
 - Configure Shadowplay for instant replay recording and document configuration
 - Configure OBS and document configuration
 - Document Tracktion Waveform configuration for guitar effects
