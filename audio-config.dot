@@ -18,7 +18,7 @@ digraph G {
             ]
         }
         nvidia_rtx_voice [
-            label="Nvidia\nRTX Voice"
+            label="NVIDIA\nRTX Voice"
             image="./img/nvidia_rtx_voice.png"
         ]
         vac_cable_chat_out [label="VAC Cable\nChat Out" image="./img/line.png"]
