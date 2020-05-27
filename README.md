@@ -12,14 +12,15 @@
 - Set up 6 Virtual Audio Cables in the VAC Control Panel (the default settings are fine).
 - Go to the Windows audio properties panel and rename both the `Playback` and `Recording` components of the `Line x` audio devices as follows (best done device by device):
 
-| Cable number | Old name | New name         |
-| ------------ | -------- | ---------------- |
-| 1            | Line 1   | Virtual Chat In  |
-| 2            | Line 2   | Virtual Default  |
-| 3            | Line 3   | Virtual Mixer    |
-| 4            | Line 4   | Virtual Media    |
-| 5            | Line 5   | Virtual Guitar   |
-| 6            | Line 6   | Virtual Chat Out |
+| Cable number | Old name | New name           |
+| ------------ | -------- | ------------------ |
+| 1            | Line 1   | Virtual Chat In    |
+| 2            | Line 2   | Virtual Default    |
+| 3            | Line 3   | Virtual Mixer      |
+| 4            | Line 4   | Virtual Media      |
+| 5            | Line 5   | Virtual Guitar     |
+| 6            | Line 6   | Virtual Chat Out   |
+| 7            | Line 7   | Virtual Soundboard |
 
 - Install NVIDIA RTX Voice and configure it to use your physical microphone as its input device (to denoise your mic) and `Virtual Chat In` as its output device (to denoise incoming chat audio).
 - Set `Virtual Default` to be your default device and default communication device under `Playback`
@@ -71,6 +72,8 @@ Note: the `Test` button produces a test tone that likely won't be audible if you
 ## Caveats
 
 The Windows volume controls will not work for audio that is forwarded with the KS repeaters. My headset has a built-in volume knob that is processed in its firmware outside of Windows, so this is not an issue for me in my specific case. I can use a KS repeater to forward audio from the Virtual Mixer to my headset. If you need volume control, replace that KS repeater with an MME repeater. I need an MME repeater for my monitor speakers, for example.
+
+RTX Voice must be running when the audio repeaters are started, otherwise the RTX audio devices won't exist.
 
 ## Legal
 
