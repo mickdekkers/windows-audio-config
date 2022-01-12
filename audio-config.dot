@@ -10,10 +10,6 @@ digraph G {
             label="Discord"
             image="./img/discord.png"
         ]
-        discord_two [
-            label="Discord Two"
-            image="./img/discord.png"
-        ]
         google_meet [
             label="Google Meet"
             image="./img/google_meet.png"
@@ -22,12 +18,8 @@ digraph G {
         vac_cable_chat_in [label="VAC Cable\nChat In" image="./img/line.png"]
         vac_cable_chat_out [label="VAC Cable\nChat Out" image="./img/line.png"]
 
-        discord -> vac_cable_chat_in
-        discord_two -> vac_cable_chat_in
-        google_meet -> vac_cable_chat_in
-        vac_cable_chat_out -> discord
-        vac_cable_chat_out -> discord_two
-        vac_cable_chat_out -> google_meet
+        discord, google_meet -> vac_cable_chat_in
+        vac_cable_chat_out -> discord, google_meet
     }
 
     subgraph cluster_soundboard {
@@ -48,9 +40,13 @@ digraph G {
             label="Spotify"
             image="./img/spotify.png"
         ]
+        brave [
+            label="Brave\nBrowser"
+            image="./img/brave.png"
+        ]
         vac_cable_media [label="VAC Cable\nMedia" image="./img/line.png"]
 
-        spotify -> vac_cable_media
+        brave, spotify -> vac_cable_media
     }
 
     subgraph cluster_audio_output {
