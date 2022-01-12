@@ -12,19 +12,19 @@
 - Set up 6 Virtual Audio Cables in the VAC Control Panel (the default settings are fine).
 - Go to the Windows audio properties panel and rename both the `Playback` and `Recording` components of the `Line x` audio devices as follows (best done device by device):
 
-| Cable number | Old name | New name           |
-| ------------ | -------- | ------------------ |
-| 1            | Line 1   | Virtual Default    |
-| 2            | Line 2   | Virtual Mixer      |
-| 3            | Line 3   | Virtual Media      |
-| 4            | Line 4   | Virtual Soundboard |
-| 5            | Line 5   | Virtual Chat In    |
-| 6            | Line 6   | Virtual Chat Out   |
+| Cable number | Old name | New name            |
+| ------------ | -------- | ------------------- |
+| 1            | Line 1   | VirtualDefault      |
+| 2            | Line 2   | Virtual Mixer       |
+| 3            | Line 3   | Virtual Media       |
+| 4            | Line 4   | Virtual Soundboard  |
+| 5            | Line 5   | Virtual Chat Input  |
+| 6            | Line 6   | Virtual Chat Output |
 
-- Set `Virtual Default` to be your default device and default communication device under `Playback`
-- Set `Virtual Chat Out` to be your default device and default communication device under `Recording`
+- Set `VirtualDefault` to be your default device and default communication device under `Playback`
+- Set `Virtual Chat Output` to be your default device and default communication device under `Recording`
 - Go to `App volume and device preferences` under `Advanced sound options` in the Windows 10 settings app and configure any media player apps (e.g. Spotify) to output to `Virtual Media`
-- Configure any voice chat apps to output incoming chat audio to `Virtual Chat In` and to use `Virtual Chat Out` as the microphone.
+- Configure any voice chat apps to output incoming chat audio to `Virtual Chat Input` and to use `Virtual Chat Output` as the microphone.
 - Disable audio ducking in Windows
 
 ### Configure the audio setup to start with Windows
@@ -47,7 +47,7 @@ To configure Discord, there's a few settings to check.
 
 ![A screenshot of Discord's voice settings (devices section)](img/discord_voice_settings_devices.png)
 
-Set the `Input Device` to `Virtual Chat Out (Virtual Audio Cable)` and the `Output Device` to `Virtual Chat In (Virtual Audio Cable)`.
+Set the `Input Device` to `Virtual Chat Output (Virtual Audio Cable)` and the `Output Device` to `Virtual Chat Input (Virtual Audio Cable)`.
 
 ![A screenshot of Discord's voice settings (input mode and sensitivity section)](img/discord_voice_settings_input_sensitivity.png)
 
@@ -67,7 +67,14 @@ Disable all of Discord's voice processing settings (`Echo Cancellation`, `Noise 
 
 ![A screenshot of Google Meet's audio settings](img/google_meet_audio_settings.png)
 
-To configure Google Meet, set the `Microphone` to `Virtual Chat Out (Virtual Audio Cable)` and the `Speakers` to `Virtual Chat In (Virtual Audio Cable)`.
+To configure Google Meet, set the `Microphone` to `Virtual Chat Output (Virtual Audio Cable)` and the `Speakers` to `Virtual Chat Input (Virtual Audio Cable)`.
+
+## Troubleshooting
+
+- The audio repeaters are a bit finicky when it comes to the names of the audio devices they'll accept.
+  The name of an audio device must not end in a space when truncated to 31 characters, otherwise the device won't be found (VAC 4.66).
+  You'll have to rename the audio device somewhat creatively to work around it if you encounter this problem.
+- If you (or the people you speak with) notice crackling, popping, or other audio distortion, you can analyze possible causes with [LatencyMon](https://www.resplendence.com/latencymon)
 
 ## Legal
 
@@ -79,4 +86,5 @@ All product and company names and logos are trademarks™ or registered® tradem
 
 ```
 electric guitar by Juan Pablo Bravo from the Noun Project
+soundboard by Parker Foote from the Noun Project
 ```
