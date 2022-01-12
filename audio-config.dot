@@ -15,11 +15,11 @@ digraph G {
             image="./img/google_meet.png"
         ]
 
-        vac_cable_chat_in [label="VAC Cable\nChat Input" image="./img/line.png"]
-        vac_cable_chat_out [label="VAC Cable\nChat Output" image="./img/line.png"]
+        vac_cable_chat_input [label="VAC Cable\nChat Input" image="./img/line.png"]
+        vac_cable_chat_output [label="VAC Cable\nChat Output" image="./img/line.png"]
 
-        discord, google_meet -> vac_cable_chat_in
-        vac_cable_chat_out -> discord, google_meet
+        discord, google_meet -> vac_cable_chat_input
+        vac_cable_chat_output -> discord, google_meet
     }
 
     subgraph cluster_soundboard {
@@ -78,7 +78,7 @@ digraph G {
     }
 
     // repeaters
-    vac_repeater_chat_in_to_mixer [
+    vac_repeater_chat_input_to_mixer [
         label="VAC Repeater\nChat Input - Mixer"
         image="./img/vac_audio_repeater.png"
     ]
@@ -86,8 +86,12 @@ digraph G {
         label="VAC Repeater\nSoundboard - Mixer"
         image="./img/vac_audio_repeater.png"
     ]
-    vac_repeater_soundboard_to_chat_out [
+    vac_repeater_soundboard_to_chat_output [
         label="VAC Repeater\nSoundboard - Chat Output"
+        image="./img/vac_audio_repeater.png"
+    ]
+    vac_repeater_microphone_to_chat_output [
+        label="VAC Repeater\nMicrophone - Chat Output"
         image="./img/vac_audio_repeater.png"
     ]
     vac_repeater_media_to_mixer [
@@ -101,13 +105,13 @@ digraph G {
 
 
     // repeater connections
-    vac_cable_chat_in -> vac_repeater_chat_in_to_mixer -> vac_cable_mixer
-    vac_cable_soundboard -> vac_repeater_soundboard_to_chat_out -> vac_cable_chat_out
+    vac_cable_chat_input -> vac_repeater_chat_input_to_mixer -> vac_cable_mixer
+    vac_cable_soundboard -> vac_repeater_soundboard_to_chat_output -> vac_cable_chat_output
     vac_cable_soundboard -> vac_repeater_soundboard_to_mixer -> vac_cable_mixer
     vac_cable_media -> vac_repeater_media_to_mixer -> vac_cable_mixer
     vac_cable_default -> vac_repeater_default_to_mixer -> vac_cable_mixer
 
-    headset -> vac_cable_chat_out[label="Microphone"]
+    headset -> vac_repeater_microphone_to_chat_output -> vac_cable_chat_output[label="Microphone"]
 
-    vac_cable_chat_in, vac_cable_chat_out, vac_cable_media, vac_cable_default -> obs
+    vac_cable_chat_input, vac_cable_chat_output, vac_cable_media, vac_cable_default -> obs
 }
