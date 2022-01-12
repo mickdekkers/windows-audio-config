@@ -1,90 +1,56 @@
 digraph G {
-    graph [bgcolor=white resolution=256 fontname=Arial fontcolor=blue nodesep=1 ranksep=1]
+    graph [bgcolor=white resolution=256 fontname=Arial fontcolor=blue nodesep=1 ranksep=1 pad=1]
     node [fontname=Arial fontcolor=black labelloc=b shape=circle width=2 fixedsize=true]
-    edge [fontname=Helvetica fontcolor=red]
+    edge [fontname=Helvetica fontcolor=red labeldistance=2]
     // TODO: find a way to center the node shape around image + label
 
     subgraph cluster_chat {
         label="Voice Chat Audio"
-        subgraph cluster_voice_chat_software {
-            label="Voice Chat Software"
-            discord [
-                label="Discord"
-                image="./img/discord.png"
-            ]
-            google_meet [
-                label="Google Meet"
-                image="./img/google_meet.png"
-            ]
-        }
-        nvidia_rtx_voice [
-            label="NVIDIA\nRTX Voice"
-            image="./img/nvidia_rtx_voice.png"
+        discord [
+            label="Discord"
+            image="./img/discord.png"
         ]
-        vac_cable_chat_out [label="VAC Cable\nChat Out" image="./img/line.png"]
-        vac_cable_chat_in [label="VAC Cable\nChat In" image="./img/line.png"]
-        vac_repeater_rtx_voice_mic_to_chat_out [
-            label="VAC Repeater\nRTX Voice Mic - Chat Out"
-            image="./img/vac_audio_repeater.png"
+        discord_two [
+            label="Discord Two"
+            image="./img/discord.png"
         ]
-        vac_repeater_chat_in_to_mixer [
-            label="VAC Repeater\nChat In - Mixer"
-            image="./img/vac_audio_repeater.png"
+        google_meet [
+            label="Google Meet"
+            image="./img/google_meet.png"
         ]
 
-        discord -> nvidia_rtx_voice[label="Incoming Chat"]
-        google_meet -> nvidia_rtx_voice[label="Incoming Chat"]
-        nvidia_rtx_voice -> vac_cable_chat_in[label="Incoming Chat\n(Denoised)"]
-        nvidia_rtx_voice -> vac_repeater_rtx_voice_mic_to_chat_out[label="Outgoing Chat\n(Denoised)"]
-        vac_repeater_rtx_voice_mic_to_chat_out -> vac_cable_chat_out
-        vac_cable_chat_out -> discord[label="Outgoing Chat"]
-        vac_cable_chat_out -> google_meet[label="Outgoing Chat"]
-        vac_cable_chat_in -> vac_repeater_chat_in_to_mixer
+        vac_cable_chat_in [label="VAC Cable\nChat In" image="./img/line.png"]
+        vac_cable_chat_out [label="VAC Cable\nChat Out" image="./img/line.png"]
+
+        discord -> vac_cable_chat_in
+        discord_two -> vac_cable_chat_in
+        google_meet -> vac_cable_chat_in
+        vac_cable_chat_out -> discord
+        vac_cable_chat_out -> discord_two
+        vac_cable_chat_out -> google_meet
     }
 
-    subgraph cluster_guitar {
-        label="Guitar Audio"
-        guitar [
-            label="Guitar\n(Rocksmith Cable)"
-            image="./img/guitar.png"
+    subgraph cluster_soundboard {
+        label="Soundboard Audio"
+        soundboard [
+            label="Soundboard"
+            image="./img/soundboard.png"
         ]
-        waveform [
-            label="Waveform"
-            image="./img/waveform.png"
-        ]
-        vac_cable_guitar [label="VAC Cable\nGuitar" image="./img/line.png"]
-        vac_repeater_guitar_to_mixer [
-            label="VAC Repeater\nGuitar - Mixer"
-            image="./img/vac_audio_repeater.png"
-        ]
-        vac_repeater_guitar_to_chat_out [
-            label="VAC Repeater\nGuitar - Chat Out"
-            image="./img/vac_audio_repeater.png"
-        ]
+        vac_cable_soundboard [label="VAC Cable\nSoundboard" image="./img/line.png"]
 
-        guitar -> waveform[label="Unprocessed Audio"]
-        waveform -> vac_cable_guitar[label="Audio With Effects"]
-        vac_cable_guitar -> vac_repeater_guitar_to_mixer
-        vac_cable_guitar -> vac_repeater_guitar_to_chat_out
+        soundboard -> vac_cable_soundboard
+
     }
 
     subgraph cluster_media_audio {
         label="Media Audio"
-        subgraph cluster_music_streaming_software {
-            label="Music Streaming Software"
-            spotify [
-                label="Spotify"
-                image="./img/spotify.png"
-            ]
-        }
-        vac_cable_media [label="VAC Cable\nMedia" image="./img/line.png"]
-        vac_repeater_media_to_mixer [
-            label="VAC Repeater\nMedia - Mixer"
-            image="./img/vac_audio_repeater.png"
+        spotify [
+            label="Spotify"
+            image="./img/spotify.png"
         ]
+        vac_cable_media [label="VAC Cable\nMedia" image="./img/line.png"]
 
         spotify -> vac_cable_media
-        vac_cable_media -> vac_repeater_media_to_mixer
     }
 
     subgraph cluster_audio_output {
@@ -99,11 +65,11 @@ digraph G {
             image="./img/vac_audio_repeater.png"
         ]
 
-        vac_cable_mixer -> vac_repeater_mixer_to_headset -> headset[label="Playback"]
+        vac_cable_mixer -> vac_repeater_mixer_to_headset -> headset
     }
 
     subgraph cluster_livestreaming_software {
-        label="Livestream Broadcasting\nSoftware"
+        label="Recording/Livestreaming\nSoftware"
         obs [
             label="OBS"
             image="./img/obs.png"
@@ -113,20 +79,39 @@ digraph G {
     subgraph cluster_default {
         label="Default Audio\n(everything else)"
         vac_cable_default [label="VAC Cable\nDefault" image="./img/line.png"]
-        vac_repeater_default_to_mixer [
-            label="VAC Repeater\nDefault - Mixer"
-            image="./img/vac_audio_repeater.png"
-        ]
-
-        vac_cable_default -> vac_repeater_default_to_mixer
     }
 
-    headset -> nvidia_rtx_voice[label="Microphone"]
-    vac_repeater_chat_in_to_mixer -> vac_cable_mixer
-    vac_repeater_guitar_to_mixer -> vac_cable_mixer
-    vac_repeater_default_to_mixer -> vac_cable_mixer
-    vac_repeater_media_to_mixer -> vac_cable_mixer
-    vac_repeater_guitar_to_chat_out -> vac_cable_chat_out
+    // repeaters
+    vac_repeater_chat_in_to_mixer [
+        label="VAC Repeater\nChat In - Mixer"
+        image="./img/vac_audio_repeater.png"
+    ]
+    vac_repeater_soundboard_to_mixer [
+        label="VAC Repeater\nSoundboard - Mixer"
+        image="./img/vac_audio_repeater.png"
+    ]
+    vac_repeater_soundboard_to_chat_out [
+        label="VAC Repeater\nSoundboard - Chat Out"
+        image="./img/vac_audio_repeater.png"
+    ]
+    vac_repeater_media_to_mixer [
+        label="VAC Repeater\nMedia - Mixer"
+        image="./img/vac_audio_repeater.png"
+    ]
+    vac_repeater_default_to_mixer [
+        label="VAC Repeater\nDefault - Mixer"
+        image="./img/vac_audio_repeater.png"
+    ]
+
+
+    // repeater connections
+    vac_cable_chat_in -> vac_repeater_chat_in_to_mixer -> vac_cable_mixer
+    vac_cable_soundboard -> vac_repeater_soundboard_to_chat_out -> vac_cable_chat_out
+    vac_cable_soundboard -> vac_repeater_soundboard_to_mixer -> vac_cable_mixer
+    vac_cable_media -> vac_repeater_media_to_mixer -> vac_cable_mixer
+    vac_cable_default -> vac_repeater_default_to_mixer -> vac_cable_mixer
+
+    headset -> vac_cable_chat_out[label="Microphone"]
 
     vac_cable_chat_in, vac_cable_chat_out, vac_cable_media, vac_cable_default -> obs
 }
