@@ -21,6 +21,8 @@
 | 5            | Line 5   | Virtual Chat Input  |
 | 6            | Line 6   | Virtual Chat Output |
 
+TODO: rename Virtual Chat Input and Virtual Chat Output (they do the opposite depending on perspective)
+
 - Set `VirtualDefault` to be your default device and default communication device under `Playback`
 - Set `Virtual Chat Output` to be your default device and default communication device under `Recording`
 - Go to `App volume and device preferences` under `Advanced sound options` in the Windows 10 settings app and configure any media player apps (e.g. Spotify) to output to `Virtual Media`
@@ -51,7 +53,7 @@ Set the `Input Device` to `Virtual Chat Output (Virtual Audio Cable)` and the `O
 
 ![A screenshot of Discord's voice settings (input mode and sensitivity section)](img/discord_voice_settings_input_sensitivity.png)
 
-<!-- TODO: update these instructions to remove RTX voice -->
+TODO: update these instructions to remove RTX voice
 
 If you're using the `Voice Activity` input mode, uncheck `Automatically determine input sensitivity` and drag the sensitivity slider all the way to the left to -100dB (the most sensitive). NVIDIA RTX Voice takes care of filtering out any noise, so we want every bit of audio it produces to trigger Discord's voice transmission.
 

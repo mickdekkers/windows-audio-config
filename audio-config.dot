@@ -15,8 +15,8 @@ digraph G {
             image="./img/google_meet.png"
         ]
 
-        vac_cable_chat_in [label="VAC Cable\nChat In" image="./img/line.png"]
-        vac_cable_chat_out [label="VAC Cable\nChat Out" image="./img/line.png"]
+        vac_cable_chat_in [label="VAC Cable\nChat Input" image="./img/line.png"]
+        vac_cable_chat_out [label="VAC Cable\nChat Output" image="./img/line.png"]
 
         discord, google_meet -> vac_cable_chat_in
         vac_cable_chat_out -> discord, google_meet
@@ -79,7 +79,7 @@ digraph G {
 
     // repeaters
     vac_repeater_chat_in_to_mixer [
-        label="VAC Repeater\nChat In - Mixer"
+        label="VAC Repeater\nChat Input - Mixer"
         image="./img/vac_audio_repeater.png"
     ]
     vac_repeater_soundboard_to_mixer [
@@ -87,7 +87,7 @@ digraph G {
         image="./img/vac_audio_repeater.png"
     ]
     vac_repeater_soundboard_to_chat_out [
-        label="VAC Repeater\nSoundboard - Chat Out"
+        label="VAC Repeater\nSoundboard - Chat Output"
         image="./img/vac_audio_repeater.png"
     ]
     vac_repeater_media_to_mixer [
