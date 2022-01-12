@@ -8,6 +8,12 @@ You'll need to have [Graphviz](https://www.graphviz.org/)'s `dot` installed.
 dot -Tpng -o audio-config.png audio-config.dot
 ```
 
+Use e.g. [ffmpeg](https://www.ffmpeg.org/) to downscale the image by 4x:
+
+```sh
+ffmpeg -i audio-config.png -vf scale="iw/4:-1" audio-config-downscaled.png
+```
+
 To automatically generate the image when the `.dot` file is saved you can use [`watchexec`](https://github.com/watchexec/watchexec).
 
 ```sh

@@ -4,7 +4,7 @@
 
 ## Audio Routing Graph
 
-![A visual graph of the audio configuration](audio-config.png)
+![A visual graph of the audio configuration](audio-config-downscaled.png)
 
 ## Setup
 
