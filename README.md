@@ -39,9 +39,7 @@ TODO: rename Virtual Chat Input and Virtual Chat Output (they do the opposite de
 | Start in | `<path-to-the-directory-that-contains-this-readme>`                                                                                |
 | Run      | Minimized                                                                                                                          |
 
-<!-- TODO: shouldn't this be in my user dir somewhere? -->
-
-- Copy/move the shortcut to `C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp`
+- Copy/move the shortcut to `%appdata%\Microsoft\Windows\Start Menu\Programs\Startup`
 
 ### Discord
 
