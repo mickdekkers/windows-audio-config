@@ -22,26 +22,54 @@ public class pInvoke
 
     [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall, ExactSpelling = true, SetLastError = true)]
     public static extern bool GetWindowRect(IntPtr hWnd, ref RECT rect);
+
+    [DllImport("user32.dll")]
+    public static extern bool ShowWindowAsync(IntPtr hWnd, int nCmdShow);
 }
 "@
 
 # Uncomment this to see debug logging:
 $DebugPreference = 'Continue'
 
+function MinimizeWindow([System.IntPtr]$WindowHandle) {
+    # 6 is SW_MINIMIZE
+    # https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow
+    [pInvoke]::ShowWindowAsync($WindowHandle, 6);
+}
+
 # based on https://stackoverflow.com/a/41891599/1233003
-function Move-Window([System.IntPtr]$WindowHandle, [int]$PosX, [int]$PosY) {
+function MoveWindow([System.IntPtr]$WindowHandle, [int]$PosX, [int]$PosY) {
   # get the window bounds
   $rect = New-Object RECT;
   [pInvoke]::GetWindowRect($WindowHandle, [ref]$rect);
 
-  # get which screen the app has been spawned into
-#   $activeScreen = [System.Windows.Forms.Screen]::FromHandle($WindowHandle).Bounds
-
   [pInvoke]::MoveWindow($WindowHandle, $PosX, $PosY, $rect.right - $rect.left, $rect.bottom - $rect.top, $true);
 }
 
+# Assumes all windows are the same dimensions
+function MoveWindowInGrid([System.IntPtr]$WindowHandle, [int]$NumWindows, [int]$WindowIndex) {
+    # get the window bounds
+    $rect = New-Object RECT;
+    [pInvoke]::GetWindowRect($WindowHandle, [ref]$rect);
+    $windowWidth = $rect.right - $rect.left;
+    $windowHeight = $rect.bottom - $rect.top
+
+    $numRows = CalcNumRows($NumWindows);
+    $windowsPerRow = [Math]::Ceiling($NumWindows / $numRows);
+    $columnIndex = $WindowIndex % $windowsPerRow;
+    $rowIndex = [Math]::Floor($WindowIndex / $windowsPerRow);
+    $posX = $columnIndex * $windowWidth;
+    $posY = $rowIndex * $windowHeight;
+
+
+    # get which screen the app has been spawned into
+    # $activeScreen = [System.Windows.Forms.Screen]::FromHandle($WindowHandle).Bounds
+
+    MoveWindow -WindowHandle $WindowHandle -PosX $posX -PosY $posY
+}
+
 # Tries to fit the windows in a square (assumes windows are themselves square)
-function CalcNumColumns([int]$NumWindows) {
+function CalcNumRows([int]$NumWindows) {
     # x
     #
     # xx
@@ -84,6 +112,8 @@ Get-ChildItem "$pwd\configs" -Filter *.cfg | ForEach-Object {
     $apps[$app.Id] = $app
 };
 
+$numWindows = $apps.count;
+$windowIndex = 0;
 # We can only move each application's window when it's done loading, so we wait for that here
 do {
     $done = [System.Collections.Generic.List[int]]::new();
@@ -95,7 +125,11 @@ do {
         {
             # Window is ready to be moved
             Write-Debug "Window ready: $($app.Id)"
-            Move-Window -WindowHandle $app.MainWindowHandle -PosX 20 -PosY 200;
+            Write-Debug "Window index: $($windowIndex)"
+            # TODO: use deterministic index based on config name
+            MoveWindowInGrid -WindowHandle $app.MainWindowHandle -NumWindows $numWindows -WindowIndex $windowIndex
+            MinimizeWindow -WindowHandle $app.MainWindowHandle
+            $windowIndex++;
             $done.Add($app.Id);
         } else {
             # Window is not yet ready, refresh the process data for the next time we check
