@@ -21,6 +21,7 @@
 - Choose whether your want audio to be played through your headphones or speakers, then delete one of these config files and adjust the other:
   - Adjust the name of your headphones audio device in [`configs/[AR] Mixer - Headphones.cfg`](configs/[AR]%20Mixer%20-%20Headphones.cfg)
   - Adjust the name of your speakers audio device in [`configs/[AR] Mixer - Speakers.cfg`](configs/[AR]%20Mixer%20-%20Speakers.cfg)
+- Adjust the sampling rate in all [configs](configs) files to match the sampling rate of the headphones or speakers you intend to use (to avoid costly and unnecessary [resampling](https://vac.muzychenko.net/en/manual/glossary.htm#FormatConversion))
 - Set `VirtualDefault` to be your default device and default communication device under `Playback`
 - Set your microphone to be your default device and default communication device under `Recording`
 - Go to `App volume and device preferences` under `Advanced sound options` in the Windows 10 settings app and configure any media player apps (e.g. Spotify, your web browser) to output to `Virtual Media`
