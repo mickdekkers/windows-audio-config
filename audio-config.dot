@@ -50,6 +50,10 @@ digraph G {
             label="OBS"
             image="./img/obs.png"
         ]
+        shadowplay [
+            label="NVIDIA\nShadowplay"
+            image="./img/geforce-experience.png"
+        ]
         headphones [
             label="Headphones"
             image="./img/headphones.png"
@@ -92,7 +96,8 @@ digraph G {
     vac_cable_mixer -> vac_repeater_mixer_to_speakers -> speakers
     vac_cable_mixer -> vac_repeater_mixer_to_headphones -> headphones
 
-    microphone -> discord, google_meet, obs[label="Microphone"]
+    microphone -> discord, google_meet, shadowplay, obs[label="Microphone"]
 
+    vac_cable_default -> shadowplay
     vac_cable_chat, vac_cable_media, vac_cable_default -> obs
 }

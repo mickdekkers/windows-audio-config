@@ -40,6 +40,15 @@
 
 - Copy/move the shortcut to `%appdata%\Microsoft\Windows\Start Menu\Programs\Startup`
 
+### Configure NVIDIA Shadowplay audio settings
+
+- Set your microphone as the microphone source
+- Under `Audio tracks`, enable the `Separate both tracks` option
+
+![An image of the Shadowplay audio settings](img/shadowplay-settings.jpg)
+
+Note that Shadowplay will always record "game audio" from whatever the default playback device is (`VirtualDefault` in our case). As far as I can tell there is currently no way to change this, so unfortunately we can't have a separate virtual cable exclusively for game audio.
+
 ## Troubleshooting
 
 - The VAC audio repeaters are a bit finicky when it comes to the names of the audio devices they'll accept.
