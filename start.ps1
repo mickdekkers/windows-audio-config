@@ -29,28 +29,28 @@ public class pInvoke
 "@
 
 # Uncomment this to see debug logging:
-$DebugPreference = 'Continue'
+# $DebugPreference = 'Continue'
 
 function MinimizeWindow([System.IntPtr]$WindowHandle) {
     # 6 is SW_MINIMIZE
     # https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow
-    [pInvoke]::ShowWindowAsync($WindowHandle, 6);
+    [pInvoke]::ShowWindowAsync($WindowHandle, 6) | Out-Null;
 }
 
 # based on https://stackoverflow.com/a/41891599/1233003
 function MoveWindow([System.IntPtr]$WindowHandle, [int]$PosX, [int]$PosY) {
   # get the window bounds
   $rect = New-Object RECT;
-  [pInvoke]::GetWindowRect($WindowHandle, [ref]$rect);
+  [pInvoke]::GetWindowRect($WindowHandle, [ref]$rect) | Out-Null;
 
-  [pInvoke]::MoveWindow($WindowHandle, $PosX, $PosY, $rect.right - $rect.left, $rect.bottom - $rect.top, $true);
+  [pInvoke]::MoveWindow($WindowHandle, $PosX, $PosY, $rect.right - $rect.left, $rect.bottom - $rect.top, $true) | Out-Null;
 }
 
 # Assumes all windows are the same dimensions
 function MoveWindowInGrid([System.IntPtr]$WindowHandle, [int]$NumWindows, [int]$WindowIndex) {
     # get the window bounds
     $rect = New-Object RECT;
-    [pInvoke]::GetWindowRect($WindowHandle, [ref]$rect);
+    [pInvoke]::GetWindowRect($WindowHandle, [ref]$rect) | Out-Null;
     $windowWidth = $rect.right - $rect.left;
     $windowHeight = $rect.bottom - $rect.top
 
