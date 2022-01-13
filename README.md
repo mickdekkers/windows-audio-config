@@ -40,7 +40,7 @@
 
 - Copy/move the shortcut to `%appdata%\Microsoft\Windows\Start Menu\Programs\Startup`
 
-### Configure NVIDIA Shadowplay audio settings
+### Configure [NVIDIA Shadowplay](https://www.nvidia.com/en-eu/geforce/geforce-experience/shadowplay/) audio settings
 
 - Set your microphone as the microphone source
 - Under `Audio tracks`, enable the `Separate both tracks` option
@@ -48,6 +48,13 @@
 ![An image of the Shadowplay audio settings](img/shadowplay-settings.jpg)
 
 Note that Shadowplay will always record "game audio" from whatever the default playback device is (`VirtualDefault` in our case). As far as I can tell there is currently no way to change this, so unfortunately we can't have a separate virtual cable exclusively for game audio.
+
+### Configure [Soundpad](https://leppsoft.com/soundpad)
+
+- Set your `Playback device` to `Virtual Mixer` instead of `Virtual Default`. This prevents Soundpad sounds doubling up in recordings.
+- Under `Recording devices`, enable only your microphone.
+
+![An image of the Soundpad device settings](img/soundpad-settings.png)
 
 ## Troubleshooting
 
