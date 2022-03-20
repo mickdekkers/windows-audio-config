@@ -100,8 +100,10 @@ function CalcNumRows([int]$NumWindows) {
 }
 
 $apps = @{};
+$windowIndices = @{};
+$configIndex = 0;
 
-Get-ChildItem "$pwd\configs" -Filter *.cfg | ForEach-Object {
+Get-ChildItem "$pwd\configs" -Filter *.cfg | Sort-Object | ForEach-Object {
     # TODO: avoid hardcoding this path
     $ar_exe = "C:\Program Files\Virtual Audio Cable\audiorepeater.exe";
     $cfg_path = "configs/" + $_.Name;
@@ -109,11 +111,13 @@ Get-ChildItem "$pwd\configs" -Filter *.cfg | ForEach-Object {
     # spawn the window and store the window object
     $app = Start-Process -FilePath $ar_exe -ArgumentList "/Config:`"$cfg_path`"" -Passthru;
     # -WindowStyle Minimized
-    $apps[$app.Id] = $app
+    $apps[$app.Id] = $app;
+    $windowIndices[$app.Id] = $configIndex;
+
+    $configIndex++;
 };
 
 $numWindows = $apps.count;
-$windowIndex = 0;
 # We can only move each application's window when it's done loading, so we wait for that here
 do {
     $done = [System.Collections.Generic.List[int]]::new();
@@ -123,13 +127,12 @@ do {
         # based on https://stackoverflow.com/a/35184224/1233003
         if ($app.MainWindowHandle -ne 0)
         {
+            $windowIndex = $windowIndices[$app.Id];
             # Window is ready to be moved
             Write-Debug "Window ready: $($app.Id)"
             Write-Debug "Window index: $($windowIndex)"
-            # TODO: use deterministic index based on config name
             MoveWindowInGrid -WindowHandle $app.MainWindowHandle -NumWindows $numWindows -WindowIndex $windowIndex
             MinimizeWindow -WindowHandle $app.MainWindowHandle
-            $windowIndex++;
             $done.Add($app.Id);
         } else {
             # Window is not yet ready, refresh the process data for the next time we check
