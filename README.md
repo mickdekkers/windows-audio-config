@@ -58,31 +58,14 @@ Note that Shadowplay will always record "game audio" from whatever the default p
 
 ### Create a restart shortcut
 
-Create a shortcut with the following options.
+- Create a shortcut named `Restart Audio Repeaters` with the following settings in its Shortcut tab:
 
-Target:
-
-```
-C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command "PATH_TO_AUDIO_CONFIG_PROJECT_DIR\restart.ps1"
-```
-
-Start in:
-
-```
-PATH_TO_AUDIO_CONFIG_PROJECT_DIR
-```
-
-Run:
-
-```
-Minimized
-```
-
-Icon:
-
-```
-PATH_TO_AUDIO_CONFIG_PROJECT_DIR\vac_audio_repeater_restart.ico
-```
+| Field    | Value                                                                                                                                |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| Target   | `C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command "<path-to-the-directory-that-contains-this-readme>\restart.ps1"` |
+| Start in | `<path-to-the-directory-that-contains-this-readme>`                                                                                  |
+| Run      | Minimized                                                                                                                            |
+| Icon     | `<path-to-the-directory-that-contains-this-readme>\vac_audio_repeater_restart.ico`                                                   |
 
 I would recommend dragging this shortcut to your Windows taskbar so you can easily access it in case the audio gets crackly for some reason.
 
