@@ -56,6 +56,36 @@ Note that Shadowplay will always record "game audio" from whatever the default p
 
 ![An image of the Soundpad device settings](img/soundpad-settings.png)
 
+### Create a restart shortcut
+
+Create a shortcut with the following options.
+
+Target:
+
+```
+C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command "PATH_TO_AUDIO_CONFIG_PROJECT_DIR\restart.ps1"
+```
+
+Start in:
+
+```
+PATH_TO_AUDIO_CONFIG_PROJECT_DIR
+```
+
+Run:
+
+```
+Minimized
+```
+
+Icon:
+
+```
+PATH_TO_AUDIO_CONFIG_PROJECT_DIR\vac_audio_repeater_restart.ico
+```
+
+I would recommend dragging this shortcut to your Windows taskbar so you can easily access it in case the audio gets crackly for some reason.
+
 ## Troubleshooting
 
 - The VAC audio repeaters are a bit finicky when it comes to the names of the audio devices they'll accept.
