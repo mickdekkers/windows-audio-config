@@ -75,6 +75,7 @@ I would recommend dragging this shortcut to your Windows taskbar so you can easi
   The name of an audio device must not end in a space when truncated to 31 characters, otherwise the device won't be found (VAC 4.66).
   You'll have to rename the audio device somewhat creatively to work around it if you encounter this problem.
 - If you (or the people you speak with) notice crackling, popping, or other audio distortion, you can analyze possible causes with [LatencyMon](https://www.resplendence.com/latencymon)
+- This is rather specific to my Steelseries Arctis Pro Wireless headset, but if the audio repeaters ever fail to start up with a message like "there is no driver" and the "Arctis Pro Wireless Game" audio device does not play any test sounds when triggered in the Windows sound settings, this can most likely be fixed by checking the "Disable all enhancements" option on that audio device. See [this reddit thread](https://web.archive.org/web/20220513183702/https://www.reddit.com/r/steelseries/comments/mchqr0/arctis_pro_wireless_game_sound_ouput_stopped/h6798hg/?context=3) for more info.
 
 ## Legal
 
